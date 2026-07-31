@@ -1,0 +1,1 @@
+[![CI Tests](https://github.com/AnnaM-create/card-to-card3/actions/workflows/ci.yml/badge.svg)](https://github.com/AnnaM-create/card-to-card3/actions/workflows/ci.yml)
