@@ -17,6 +17,7 @@ public class TransferTest {
     @BeforeAll
     public static void setUp() {
         Configuration.holdBrowserOpen = true;
+        Configuration.headless = true;
 
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
