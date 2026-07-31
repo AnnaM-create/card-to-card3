@@ -2,6 +2,7 @@ package test;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.DashboardPage;
@@ -50,5 +51,27 @@ public class TransferTest {
 
         assertEquals(firstCardBalanceBefore + transferAmount, firstCardBalanceAfter);
         assertEquals(secondCardBalanceBefore - transferAmount, secondCardBalanceAfter);
+    }
+
+    @Disabled("Баг: перевод отрицательной суммы проходит успешно. Issue #1")
+    @Test
+    void shouldNotTransferNegativeAmount() {
+        var loginPage = LoginPage.openPage();
+        var verificationPage = loginPage.validLogin("vasya", "qwerty123");
+        DashboardPage dashboardPage = verificationPage.validVerify("12345");
+
+        int firstCardBalanceBefore = dashboardPage.getCardBalance(0);
+        int secondCardBalanceBefore = dashboardPage.getCardBalance(1);
+
+        int transferAmount = -5000;
+
+        var transferPage = dashboardPage.selectCardToReplenish(0);
+        dashboardPage = transferPage.transferMoney(transferAmount, "5559 0000 0000 0002");
+
+        int firstCardBalanceAfter = dashboardPage.getCardBalance(0);
+        int secondCardBalanceAfter = dashboardPage.getCardBalance(1);
+
+        assertEquals(firstCardBalanceBefore, firstCardBalanceAfter, "Баланс первой карты не должен был измениться!");
+        assertEquals(secondCardBalanceBefore, secondCardBalanceAfter, "Баланс второй карты не должен был измениться!");
     }
 }
