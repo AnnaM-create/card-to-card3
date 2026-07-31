@@ -1,0 +1,33 @@
+name: CI Tests
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Start application
+        run: java -jar artifacts/app-ibank-build-for-testers.jar &
+
+      - name: Wait for application to start
+        run: sleep 5
+
+      - name: Run tests
+        run: ./gradlew test
