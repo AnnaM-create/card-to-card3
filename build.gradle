@@ -10,13 +10,14 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.junit:junit-bom:6.0.0')
-    implementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
-    implementation 'com.codeborne:selenide:7.2.3'
+    testImplementation 'com.codeborne:selenide:7.2.3'
+    testImplementation 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
 }

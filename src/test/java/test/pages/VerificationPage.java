@@ -7,9 +7,9 @@ public class VerificationPage {
     private SelenideElement codeInput = $("[data-test-id='code'] input");
     private SelenideElement verifyButton = $("[data-test-id='action-verify']");
 
-    public DashboardPage validVerify(String verificationCode) {
+    public pages.DashboardPage validVerify(String verificationCode) {
         codeInput.setValue(verificationCode);
         verifyButton.click();
-        return new DashboardPage();
+        return new pages.DashboardPage();
     }
 }

@@ -20,8 +20,8 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public TransferPage selectCardToReplenish(int index) {
+    public pages.TransferPage selectCardToReplenish(int index) {
         cards.get(index).$("button").click();
-        return new TransferPage();
+        return new pages.TransferPage();
     }
 }

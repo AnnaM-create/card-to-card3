@@ -14,10 +14,10 @@ public class LoginPage {
         return new LoginPage();
     }
 
-    public VerificationPage validLogin(String login, String password) {
+    public pages.VerificationPage validLogin(String login, String password) {
         loginInput.setValue(login);
         passwordInput.setValue(password);
         loginButton.click();
-        return new VerificationPage();
+        return new pages.VerificationPage();
     }
 }
